@@ -7,10 +7,12 @@ $config_TVShowDrives = @(
                             "I:\TV Shows"
                         )
 
+$config_reportImagePath = 'images\sdnReportLogo.jpg'
+
 $existingShows = Get-ChildItem $config_TVShowDrives -Directory | SELECT FullName, Name, Size | SORT name
 
 $Rpt = @()
-$Rpt += get-htmlopenpage -TitleText "Master TV Shows" 
+$Rpt += get-htmlopenpage -TitleText "Media Master report" -LeftLogoString $config_reportImagePath -RightLogoName Alternate
 $Rpt += Get-HTMLContentOpen
 
 $Rpt += get-htmlcontentdatatable -ArrayOfObjects ($existingShows | SELECT Name, FullName, @{ expression={
@@ -61,4 +63,4 @@ $Rpt += get-htmlcontentdatatable -ArrayOfObjects ($existingShows | SELECT Name, 
 
 $Rpt += Get-HTMLContentClose
 $Rpt += Get-HTMLClosePage
-Save-HTMLReport -ReportContent $rpt -ShowReport  $Rp
+Save-HTMLReport -ReportContent $rpt -ReportPath 'D:\XAMPP\htdocs\media\docs\' -ReportName "masterTV" -showreport
