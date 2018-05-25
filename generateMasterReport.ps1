@@ -16,9 +16,9 @@ $Rpt += Get-HTMLContentOpen
 $Rpt += get-htmlcontentdatatable -ArrayOfObjects ($existingShows | SELECT Name, FullName, @{ expression={
 
                                                                                                             $name = $_.FullName
-                                                                                                            $name = $name -split('\')
+                                                                                                            $name = $name -split("\\")
 
-                                                                                                            switch($name){
+                                                                                                            switch($name[0]){
 
                                                                                                                 "E:" { $airStatus = 'Active' }
                                                                                                                 "G:" { $airStatus = 'Ended' }
