@@ -15,7 +15,7 @@ return $results
 #$showStats = Get-SDNMediaShows -SearchQuery 'Charles in Charge' -FileFilter '*.mkv'
 
 #Query Database for episode
-function Get-SDNMediaEpisode {
+function Get-SDNMediaEpisodes {
 [cmdletbinding()]
 param( 
     [string]$SearchQuery, 
@@ -92,3 +92,20 @@ return $results
 }
 
 #SDN-EpisodeExists -EpisodeName 'e' -IsFormatted $false
+
+function SDN-GenerateMediaID {
+[cmdletbinding()]
+param( [string]$FilePath, [string]$Date = (Get-Date -UFormat "%m%d%y").ToString(), [string]$Time = (((Get-Date -UFormat "%H%M%S").ToString()) -replace ':', ''))
+
+    Process{
+        
+        $generatedID = ($FilePath[0].ToString())
+        $generatedID += $Date
+        $generatedID += '-'
+        $generatedID += $Time
+        $generatedID += (Get-Item -LiteralPath $FilePath).Length
+
+        return $generatedID
+    }
+
+}

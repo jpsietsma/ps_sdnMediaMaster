@@ -1,6 +1,4 @@
-﻿."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.charts.functions.ps1"
-$rpt = ''
-
+﻿.".\SDNMedia.charts.functions.ps1"
 
 #Gathering TV data and building chart
 $tvDropDir = "s:\~drops\tvdrop"

@@ -1,8 +1,8 @@
 ﻿#Install-Module -Name ReportHTML
-."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.charts.functions.ps1"
-."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.sqldatabase.functions.ps1"
-."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.filesystem.functions.ps1"
-."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.media.classes.ps1"
+.".\SDNMedia.charts.functions.ps1"
+.".\SDNMedia.sqldatabase.functions.ps1"
+.".\SDNMedia.filesystem.functions.ps1"
+.".\SDNMedia.media.classes.ps1"
 
 
 $config_TVShowDrives = @(
@@ -141,6 +141,8 @@ foreach ($tab in $tabarray ){
 #region TV Torrent Bar Chart
         $tvChart = Get-HTMLBarChartObject
         $tvChart.Title = "TV Torrent Downloads - Last 14 Days"
+        $tvChart.Size.Width = 450
+        $tvChart.ChartStyle.responsive = $true
 
         $tvDropDir = "s:\~drops\tvdrop"
         $tvFilter = '*.sdn_tv_added'
