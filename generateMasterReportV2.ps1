@@ -332,10 +332,10 @@ foreach ($tab in $tabarray ){
         $rpt += Get-HTMLContentOpen -HeaderText "EZTV.ag RSS Feed"
         $rpt += get-htmlcontentdatatable -ArrayOfObjects ($eztvItems)
         $rpt += Get-HTMLContentClose       
-        $rpt += Get-HTMLContentOpen -HeaderText "Limetorrents.cc RSS Feed" -IsHidden
+        $rpt += Get-HTMLContentOpen -HeaderText "Limetorrents.cc RSS Feed"
         $rpt += get-htmlcontentdatatable -ArrayOfObjects ($limeItems)
         $rpt += Get-HTMLContentClose
-        $rpt += Get-HTMLContentOpen -HeaderText "Yts.am RSS Feed" -IsHidden
+        $rpt += Get-HTMLContentOpen -HeaderText "Yts.am RSS Feed"
         $rpt += get-htmlcontentdatatable -ArrayOfObjects ($yifyItems)
         $rpt += Get-HTMLContentClose
         $rpt += get-htmltabcontentClose
