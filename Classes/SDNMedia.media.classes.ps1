@@ -1,4 +1,8 @@
-﻿
+﻿class SDNMediaFile {
+
+
+
+}
 
 class Episode { 
 

@@ -10,7 +10,7 @@ param( [string]$DataDirectory, [string]$FileFilter = '*.*', [int]$NumResults = 1
             $DataSet += @([pscustomobject]@{name=$fDate[0]; data=$fDate[0]})
         }
 
-        $DataSet = $DataSet | group name | select count, name, data -Last $NumResults
+        $DataSet = $DataSet | select count, name, data -Last $NumResults | group name 
         return $DataSet
 
     }
