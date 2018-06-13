@@ -345,6 +345,6 @@ foreach ($tab in $tabarray ){
 }
 
 $rpt += Get-HTMLClosePage
-Save-HTMLReport -ReportContent $rpt -ReportPath 'D:\XAMPP\htdocs\media\docs\' -ReportName "masterSDN"
+Save-HTMLReport -ReportContent $rpt -ReportPath 'D:\XAMPP\htdocs\media\docs\' -ReportName "masterSDNv2"
 
 $rpt = ''
