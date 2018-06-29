@@ -1,22 +1,23 @@
 ﻿#Install-Module -Name ReportHTML
-.".\SDNMedia.charts.functions.ps1"
-.".\SDNMedia.sqldatabase.functions.ps1"
-.".\SDNMedia.filesystem.functions.ps1"
-.".\SDNMedia.media.classes.ps1"
+."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.charts.functions.ps1"
+."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.sqldatabase.functions.ps1"
+."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.filesystem.functions.ps1"
+."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.media.classes.ps1"
 
 
 $config_TVShowDrives = @(
                             "E:\TV Shows",
                             "G:\TV Shows",
                             "H:\TV Shows",
-                            "I:\TV Shows"
+                            "I:\TV Shows",
+                            "Q:\TV Shows"
                         )
 
 $config_MoviesDrives = @(   "F:\",
                             "M:\"
                         )
 
-$tvStorageDrives = @('E', 'G', 'H', 'I', 'F', 'S')
+$tvStorageDrives = @('E', 'G', 'H', 'I', 'F', 'S', 'Q')
 
 $config_reportImagePath = 'images\sdnReportLogo.jpg'
 
@@ -47,6 +48,7 @@ foreach ($tab in $tabarray ){
                                                                                                                 "G:" { $airStatus = 'Ended' }
                                                                                                                 "H:" { $airStatus = 'Active' }
                                                                                                                 "I:" { $airStatus = 'Ended' }
+                                                                                                                "Q:" { $airStatus = 'Ended' }
 
                                                                                                                 default { $airStatus = 'unknown' }
 
@@ -216,6 +218,7 @@ foreach ($tab in $tabarray ){
                                                                                                                 "G:" { $airStatus = 'Ended' }
                                                                                                                 "H:" { $airStatus = 'Active' }
                                                                                                                 "I:" { $airStatus = 'Ended' }
+                                                                                                                "Q:" { $airStatus = 'Ended' }
 
                                                                                                                 default { $airStatus = 'unknown' }
 
