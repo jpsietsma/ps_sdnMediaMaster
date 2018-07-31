@@ -1,8 +1,8 @@
 #Install-Module -Name ReportHTML
-."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.charts.functions.ps1"
-."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.sqldatabase.functions.ps1"
-."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.filesystem.functions.ps1"
-."C:\users\jimmys\desktop\sort\~scripts\SDNMedia.media.classes.ps1"
+."C:\Users\JimmyS\Documents\GitHub\ps_sdnMediaMaster\SDNMedia.charts.functions.ps1"
+."C:\Users\JimmyS\Documents\GitHub\ps_sdnMediaMaster\SDNMedia.sqldatabase.functions.ps1"
+."C:\Users\JimmyS\Documents\GitHub\ps_sdnMediaMaster\SDNMedia.filesystem.functions.ps1"
+."C:\Users\JimmyS\Documents\GitHub\ps_sdnMediaMaster\SDNMedia.media.classes.ps1"
 
 
 $config_TVShowDrives = @(
@@ -12,8 +12,7 @@ $config_TVShowDrives = @(
                             "I:\TV Shows"
                         )
 
-$config_MoviesDrives = @(   "F:\",
-                            "M:\"
+$config_MoviesDrives = @(   "F:\"
                         )
 
 $tvStorageDrives = @('E', 'G', 'H', 'I', 'F', 'S')
@@ -291,12 +290,21 @@ foreach ($tab in $tabarray ){
 
         foreach($result in $personalRSSResults){
 
-            $url = 'URL01' + $result.enclosure.url + 'URL02' + $title + 'URL03'
             $title = $result.title
-            $upDate = $result.pubDate
-            $description = $result.description
+            $titleInfo = SDN-GetShowFileInfo($title)
 
-            $personalItem = @([pscustomobject]@{title=$title;link=$url;uploadDate=$upDate;description=$description})
+            $url = 'URL01' + $result.enclosure.url + 'URL02' + $titleInfo.ShowNameUnformatted + 'URL03'
+            $upDate = $result.pubDate
+
+            $showStatus = SDN-GetAiringStatus -showName $titleInfo.ShowName
+
+            $sdnStatus = SDN-GetShowStatus -showName $titleInfo.ShowName
+
+            $episodeExists = SDN-GetEpisodeExists($titleInfo.ShowNameUnformatted)
+
+            $upDate = Get-Date($upDate) -Format g
+
+            $personalItem = @([pscustomobject]@{"Show Name"=$titleInfo.ShowName;Season=$titleInfo.ShowSeason;Episode=$titleInfo.ShowEpisode;title=$title;Magnet=$url;Uploaded=$upDate;"Airing Status"=$showStatus;"SDN Status"=$sdnStatus;"On Plex"=$episodeExists;})
             $personalItems += $personalItem
 
         }
@@ -314,10 +322,11 @@ foreach ($tab in $tabarray ){
 
             $url = 'URL01' + $eztv.enclosure.url + 'URL02' + $filename + 'URL03'
             $filename = $eztv.fileName
+
             $seeds = $eztv.seeds
             $peers = $eztv.peers
 
-            $eztvItem = @([pscustomobject]@{filename=$filename;link=$url;seeds=$seeds;peers=$peers})
+            $eztvItem = @([pscustomobject]@{filename=$filename;link=$url;seeds=$seeds;peers=$peers;"SDN Status"='';})
             $eztvItems += $eztvItem
 
         }
@@ -354,6 +363,7 @@ foreach ($tab in $tabarray ){
 }
 
 $rpt += Get-HTMLClosePage
-Save-HTMLReport -ReportContent $rpt -ReportPath 'D:\XAMPP\htdocs\media\docs\' -ReportName "masterSDN"
+
+Save-HTMLReport -ReportContent $rpt -ReportPath 'D:\XAMPP\htdocs\media\docs\' -ReportName "masterSDN" | Out-Null
 
 $rpt = ''
